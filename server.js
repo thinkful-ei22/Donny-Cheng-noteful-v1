@@ -1,60 +1,41 @@
 'use strict';
 
 // Load array of notes
-const express = require('express');
+console.log('Hello Noteful!');
 
-const data = require('./db/notes');
+// INSERT EXPRESS APP CODE HERE...
+
+const express = require('express');
+const morgan = require('morgan');
+const { PORT } = require('./config');
+const router  = require('./router/notes.router');
+
 
 const app = express();
 
+//const {requestLogger} = require('./middleware/logger');
 
-console.log('Hello Noteful!');
-app.use(express.static('public')); // serve static files
+//Create a static webserver
+app.use(express.static('public'));
 
-//note route 
-app.get('/api/notes', (req, res) => {
-  const query = req.query;
-  let notes = data;
-    
-  if (query.searchTerm) {
-    notes = notes.filter(note => (note.title).includes(query.searchTerm));
-  }
-        
-  res.json(notes);
-});
+//Parse request body into JSON
+app.use(express.json());
 
-//named route parameter
-app.get('/api/notes/:id', (req, res) => {
-  const id = parseInt(req.params.id);
-  const foundNote = data.find(note => note.id === id);
-  res.json(foundNote);
-  
-});
+//router
+app.use('/api', router);
+
+//use morgan logger for all 
+app.use(morgan('dev'));
+
+//log all requests
+//app.use(requestLogger);
 
 
 
 
-app.listen(8080, function () {
+
+app.listen(PORT, function () {
   console.info(`Server listening on ${this.address().port}`);
 }).on('error', err => {
   console.error(err);
 });
-
-// INSERT EXPRESS APP CODE HERE...
-//const express = reqires('rexprserss);
-//const app = express();
-
-//app.use(express.static('pblic)');
-
-//BUILD GET ROUTES
-//has to be exact match
-//app.get(/api/notes, (req,res) = > {
-
-//});
-
-//app.listen'(8080, () = > console.log))
-
-
-//route matching and query strings
-
-//
