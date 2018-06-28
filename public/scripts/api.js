@@ -65,7 +65,7 @@ const api = {
     });
   },
 
-
+  /*
   create: function (obj, callback) {
     $.ajax({
       type: 'POST',
@@ -77,7 +77,20 @@ const api = {
       success: callback
     });
   },
+  */
 
+  create: function(obj){
+    return $.ajax({
+      type: 'POST',
+      url: '/api/notes',
+      contentType: 'application/json',
+      dataType: 'json',
+      processData: false,
+      data: JSON.stringify(obj),
+    });
+  },
+
+/*
   remove: function (id, callback) {
     return $.ajax({
       type: 'DELETE',
@@ -86,5 +99,18 @@ const api = {
       success: callback
     });
   }
+  */
+
+  remove: function(id){
+    return $.ajax({
+      type: 'DELETE',
+      url: `/api/notes/${id}`,
+      dataType: 'json',
+    });
+  }
+
+
+
+
 
 };
