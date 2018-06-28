@@ -3,6 +3,7 @@
 
 const api = {
 
+  /*
   search: function (query, callback) {
     $.ajax({
       type: 'GET',
@@ -12,7 +13,17 @@ const api = {
       success: callback
     });
   },
+  */
+  search: function (query) {
+    return $.ajax({
+      type: 'GET',
+      url: '/api/notes/',
+      dataType: 'json',
+      data: query
+    });
+  },
 
+  /*
   details: function (id, callback) {
     $.ajax({
       type: 'GET',
@@ -21,7 +32,18 @@ const api = {
       success: callback
     });
   },
+  */
 
+  details: function (id) {
+    return $.ajax({
+      type: 'GET',
+      url: `/api/notes/${id}`,
+      dataType: 'json',
+      data: id
+    });
+  },
+
+  /*
   update: function (id, obj, callback) {
     $.ajax({
       type: 'PUT',
@@ -32,6 +54,17 @@ const api = {
       success: callback
     });
   },
+*/
+  update: function(id,obj){
+    return $.ajax({
+      type:'PUT',
+      url: `/api/notes/${id}`,
+      contentType: 'application/json',
+      dataType: 'json',
+      data: JSON.stringify(obj)
+    });
+  },
+
 
   create: function (obj, callback) {
     $.ajax({

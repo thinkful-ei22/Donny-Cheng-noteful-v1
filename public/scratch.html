@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Testing</title>
+</head>
+<body>
+  
+    <h1>Testing again</h1>
+
+    <script type="text/javascript" src="//code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+    <script type="text/javascript" src="scripts/api.js"></script>
+
+    <script>
+         // test get all
+    api.search({})
+        .then(response => {
+        console.log(response)
+        });
+
+    // test get all with search term
+    api.search({searchTerm: 'incredible'})
+        .then(response => {
+        console.log(response)
+        });
+    // details test
+    api.details('1004')
+        .then(response => {
+            console.log(response);
+        });
+    // update 
+    const testObject = {id:1002, title:'test',content:'test content' };
+    api.update('1000',testObject)
+        .then(response => {
+            console.log(response);
+        });
+
+    
+        
+    </script>
+</body>
+</html>
