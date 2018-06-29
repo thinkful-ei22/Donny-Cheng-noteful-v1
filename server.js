@@ -32,10 +32,13 @@ app.use(morgan('dev'));
 
 
 
+//wrapping app.js so the express app can be required and used in our test files
+if(require.main === module){
+  app.listen(PORT, function () {
+    console.info(`Server listening on ${this.address().port}`);
+  }).on('error', err => {
+    console.error(err);
+  });
+}
 
-
-app.listen(PORT, function () {
-  console.info(`Server listening on ${this.address().port}`);
-}).on('error', err => {
-  console.error(err);
-});
+module.exports=app; //export for testing
